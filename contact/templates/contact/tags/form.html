@@ -1,0 +1,13 @@
+
+<div class="col-2">
+    <h5>Падпісвайцеся на нашыя навіны</h5>
+</div>
+<div class="col-2">
+        <form method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+            {{ contact_form }}
+        </form>
+</div>
+<div class="col-2">
+    <button class="btn btn-primary" type="submit">Subscribe</button>
+</div>

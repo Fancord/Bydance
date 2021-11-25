@@ -1,0 +1,79 @@
+{% extends "layout/basic.html" %}
+
+{% block title %} {{ dance.name }} {% endblock %}
+
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+    <div id="content">
+        <div class="innerwrapper">
+            <section>
+                <div id="dances">
+                    <!--Название-->
+                    <h1>
+                       {{ dance.name }}
+                    </h1>
+                    <hr class="double">
+                    <!--Описание-->
+                    <article class="dance-des">
+                        <h2>{{ dance.description|safe }}</h2>
+                    </article>
+                    <hr>
+                    <!--Вкладки с видео-->
+                    <div class="accordion dance-des" id="accordionPanelsStayOpenExample">
+                        {% if dance.dancePerfomances.all|length %}
+                          <h2 style="font-size: 20px;">
+                               Выкананне танца
+                          </h2>
+                        {% endif %}
+                        {% if dance.dancePerfomances.all|length %}
+                            {% for perfomance in dance.dancePerfomances.all %}
+                            <div>
+                                {{ perfomance.description|safe }}
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            {% for perfomance in dance.dancePerfomance.all %}
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="{{ perfomance.nameforHTML }}">
+                                  <button class="accordion-button"
+                                          type="button"
+                                          data-bs-toggle="collapse"
+                                          data-bs-target="#{{ perfomance.nameforHTML }}"
+                                          aria-expanded="true"
+                                          aria-controls="{{ perfomance.nameforHTML }}">
+                                      {{ perfomance.name }}
+                                  </button>
+                                </h2>
+                                <div id="{{ perfomance.nameforHTML }}"
+                                     class="accordion-collapse collapse show"
+                                     aria-labelledby="{{ perfomance.nameforHTML }}">
+                                  <div class="accordion-body">
+                                      {{ perfomance.description|safe }}
+                                  </div>
+                                </div>
+                              </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    {% if dance.dancePerfomances.all|length %}
+                    <div>
+                        <p style="font-size:14pt">
+                            Калі Вам вядомы адметныя рэгіянальныя варыянты танца, просім дасылаць відэазапісы на адрас
+                            somemail.gmail.com з абавязковай пазнакай паходжання, выканаўцаў, абставін і часу запісу.
+                            Больш рэгіянальных варыянтаў танца можна пабачыць на нашым
+                            <a href="#">youtube-канале</a>.
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+{% endblock %}

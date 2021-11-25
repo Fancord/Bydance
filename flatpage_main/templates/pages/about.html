@@ -1,0 +1,13 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Пра што гэта ўсё{% endblock %}
+
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+    {{flatpage.newflatpage.description|safe}}
+    {{flatpage.newflatpage.text_block|safe}}
+{% endblock %}

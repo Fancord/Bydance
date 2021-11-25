@@ -1,0 +1,57 @@
+{% load static %}
+
+{% load bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load flatpages %}
+{% get_flatpages '/about/' as about_pages %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Галоўная{% endblock %}</title>
+        <link rel="stylesheet" type="text/css"
+            href="{% static 'dances/style.css' %}">
+    </head>
+
+    <body class="" style="overflow:hidden;">
+        <div id="container">
+            <nav id="mp_navigation">
+                <div>
+                    <ul>
+                        {% load flatpages %}
+                        {% for page in about_pages %}
+                        <li><a href="{{ page.url }}"><span>Пра што гэта ўсё</span></a></li>
+                        {% endfor %}
+                        <li><a href="#"><span>Навіны</span></a></li>
+                        <li><a href="{% url 'danceView' %}"><span>Танцы</span></a></li>
+                        <li><a href="#"><span>Музыка</span></a></li>
+                        <li><a href="#"><span>Строі</span></a></li>
+                        <li><a href="#"><span>Мерапрыемства</span></a></li>
+                        <li><a href="#"><span>Сацыяльныя сеткі</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for img in mainpage_list %}
+                        {% if img.pk == 1 %}
+                            <div class="carousel-item active">
+                                <img src="{{ img.img.url }}" class="d-block">
+                            </div>
+                        {% else %}
+                            <div class="carousel-item">
+                                <img src="{{ img.img.url }}" class="d-block">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+

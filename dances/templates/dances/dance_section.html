@@ -1,0 +1,54 @@
+{% extends "layout/basic.html" %}
+
+{% block title %} Танцы {% endblock %}
+
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+    <div id="content">
+        <div class="innerwrapper">
+            <section>
+                <div id="dances">
+                    <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
+                        {% for dancetype in dancetype_list %}
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="{{ dancetype.name }}-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#{{ dancetype.name }}"
+                                            type="button"
+                                            role="{{ dancetype.name }}"
+                                            aria-controls="{{ dancetype.name }}"
+                                            aria-selected="false">
+
+                                        {{ dancetype.name }}
+
+                                    </button>
+                                </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        {% for dancetype in dancetype_list %}
+                            <div class="tab-pane fade" id="{{ dancetype.name }}" role="tabpanel" aria-labelledby="{{ dancetype.name }}-tab">
+                                {% for dance in dancetype.dances.all %}
+                                    {% if dance.draft == False %}
+                                        <h1>
+                                            <a href="{% url 'dance_detail' dance.name %}">
+                                               {{ dance.name }}
+                                            </a>
+                                        </h1>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+{% endblock %}

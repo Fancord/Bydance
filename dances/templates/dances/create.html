@@ -1,0 +1,13 @@
+<!--Для создания модели танца на сайте-->
+{% extends "layout/basic.html" %}
+
+{% block title %} Дабаўленне танца {% endblock %}
+
+{% block main %}
+    <h1>Дабаўленне танца</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Дадаць">
+    </form>
+{% endblock %}
